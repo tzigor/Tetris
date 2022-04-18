@@ -64,8 +64,8 @@ let container = {
     },
 
     clearBottom() {
-        let full = true;
         for (let i = config.rowsCount - 1; i > 0; i--) {
+            let full = true;
             for (let j = 0; j < config.colsCount; j++) {
                 if (this.array[i][j] < 100) full = false;
             }
@@ -76,7 +76,7 @@ let container = {
                     }
                 }
                 this.drawArray();
-                i--;
+                i++;
             }
         }
     },
