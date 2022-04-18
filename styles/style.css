@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: #cfcfcf;
+}
+
+.gameBoard {
+    padding-top: 50px;
+    padding-left: 50px;
+    display: flex;
+}
+
+.gameContainer {}
+
+.nextBlock {
+    margin-left: 30px;
+}
+
+table {
+    border-collapse: collapse;
+    background: rgb(248, 250, 252);
+}
+
+td {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgb(201, 201, 201);
+}
+
+.user {
+    background: rgb(112, 162, 255);
+}
+
+.block0 {
+    background: rgb(248, 250, 252);
+}
+
+.block1 {
+    background: rgb(19, 165, 0);
+}
+
+.block2 {
+    background: rgb(255, 255, 0);
+}
+
+.block3 {
+    background: rgb(255, 0, 0);
+}
+
+.block4 {
+    background: rgb(0, 255, 255);
+}
+
+.block5 {
+    background: rgb(255, 166, 0);
+}
+
+.block6 {
+    background: rgb(253, 1, 178);
+}
+
+.block7 {
+    background: rgb(0, 4, 255);
+}
