@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
 
+:root {
+    --mainBgColor: #cfcfcf;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,19 +11,85 @@
 }
 
 html {
-    background: #cfcfcf;
+    background: var(--mainBgColor);
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding-left: 50px;
+    color: blue;
+    background-color: azure;
+    font-size: 34px;
+    line-height: 34px;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding-left: 50px;
+    background-color: #cfcfcf;
+    font-size: 26px;
 }
 
 .gameBoard {
-    padding-top: 50px;
     padding-left: 50px;
     display: flex;
 }
 
 .gameContainer {}
 
-.nextBlock {
+.navigation {
     margin-left: 30px;
+}
+
+.nextBlock {
+    margin-top: 20px;
+}
+
+.sizeSelector {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.size:hover {
+    cursor: pointer;
+}
+
+.size {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 14px;
+    background-color: aliceblue;
+    border-radius: 5px;
+    color: deepskyblue;
+    border: 1px solid rgb(124, 187, 255);
+}
+
+.sizeSelected {
+    color: aliceblue;
+    background-color: rgb(10, 0, 153);
+}
+
+.next {
+    font-size: 18px;
+}
+
+.btnNewGame {
+    width: 100px;
+    height: 30px;
+    margin-top: 20px;
 }
 
 table {
@@ -30,7 +100,7 @@ table {
 td {
     width: 30px;
     height: 30px;
-    border: 1px solid rgb(201, 201, 201);
+    border: 1px solid var(--mainBgColor);
 }
 
 .user {
@@ -39,6 +109,10 @@ td {
 
 .block0 {
     background: rgb(248, 250, 252);
+}
+
+.block0Next {
+    background: var(--mainBgColor);
 }
 
 .block1 {
@@ -67,4 +141,16 @@ td {
 
 .block7 {
     background: rgb(0, 4, 255);
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    background-color: black;
+    color: gainsboro;
+    margin-top: 30px;
+    padding-left: 30px;
+    font-size: 14px;
+    line-height: 14px;
 }

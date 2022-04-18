@@ -19,7 +19,6 @@ let nextBlock = {
         }
     },
 
-
     /**
      * Рисует поле Next Block.
      * @param {n: number} размер блока Next Block - n x n.
@@ -73,7 +72,8 @@ let nextBlock = {
      * @param {c: number} color 
      */
     drawSquare(row, col, c) {
-        const Squareclass = 'block' + c;
+        let Squareclass = 'block' + c;
+        if (c === 0) Squareclass = 'block0Next';
         this.getSquare(row, col).classList = Squareclass;
     },
 

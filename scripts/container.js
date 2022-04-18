@@ -64,6 +64,7 @@ let container = {
     },
 
     clearBottom() {
+        let fullsCount = 0;
         for (let i = config.rowsCount - 1; i > 0; i--) {
             let full = true;
             for (let j = 0; j < config.colsCount; j++) {
@@ -76,8 +77,18 @@ let container = {
                     }
                 }
                 this.drawArray();
+                fullsCount++;
                 i++;
             }
+        }
+        if (fullsCount === 1) {
+            game.score += 100;
+        } else if (fullsCount === 2) {
+            game.score += 300;
+        } else if (fullsCount === 3) {
+            game.score += 700;
+        } else if (fullsCount > 3) {
+            game.score += 1500;
         }
     },
 

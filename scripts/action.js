@@ -8,6 +8,8 @@ let action = {
                 break;
             case "ArrowDown":
                 block.shiftDown();
+                game.score++;
+                document.querySelector('.score').textContent = 'Score : ' + game.score;
                 break;
             case "ArrowLeft":
                 block.shiftLeft();
@@ -16,7 +18,9 @@ let action = {
                 block.shiftRight();
                 break;
             case " ":
+                game.score += config.rowsCount - block.row;
                 block.dropDown();
+                document.querySelector('.score').textContent = 'Score : ' + game.score;
                 break;
             default:
                 ;
