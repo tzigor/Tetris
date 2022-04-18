@@ -1,3 +1,5 @@
+"use strict";
+
 let block = {
     row: 0, // текущее положение блока в игровом массиве (левый верхний угол)
     col: 0,
@@ -9,6 +11,14 @@ let block = {
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ],
+
+    getCell(row, col) {
+        return container.getCell(row + block.row, col + block.col);
+    },
+
+    setCell(row, col, t) {
+        container.setCell(row + block.row, col + block.col, t);
+    },
 
     clearTempArray() {
         for (let i = 0; i < 4; i++) {
@@ -22,7 +32,7 @@ let block = {
         for (let i = 0; i < block.size; i++) {
             for (let j = 0; j < block.size; j++) {
                 if (block.tempArray[i][j] === block.type) {
-                    container.array[i + block.row][j + block.col] = 0;
+                    block.setCell(i, j, 0);
                     container.drawSquare(i + block.row, j + block.col, 0);
                 }
             }
@@ -37,8 +47,8 @@ let block = {
         for (let i = 0; i < block.size; i++) {
             for (let j = 0; j < block.size; j++) {
                 if ((i + block.row) < config.rowsCount
-                    && container.array[i + block.row][j + block.col] === block.type) {
-                    block.tempArray[i][j] = container.array[i + block.row][j + block.col];
+                    && block.getCell(i, j) === block.type) {
+                    block.tempArray[i][j] = block.getCell(i, j);
                 }
             }
         }
@@ -51,7 +61,7 @@ let block = {
         for (let i = 0; i < block.size; i++) {
             for (let j = 0; j < block.size; j++) {
                 if (block.tempArray[i][j] === block.type) {
-                    container.array[i + block.row][j + block.col] = block.tempArray[i][j];
+                    block.setCell(i, j, block.tempArray[i][j]);
                     container.drawSquare(i + block.row, j + block.col, block.type);
                 }
             }
@@ -61,11 +71,19 @@ let block = {
     draw() {
         for (let i = 0; i < block.size; i++) {
             for (let j = 0; j < block.size; j++) {
-                if (container.array[i + block.row][j + block.col] === block.type) {
+                if (block.getCell(i, j) === block.type) {
                     container.drawSquare(i + block.row, j + block.col, block.type);
                 }
             }
         }
+    },
+
+    moveAction(newRow, newCol) {
+        block.copyToTempArray();
+        block.clearCurrent();
+        block.row = newRow;
+        block.col = newCol;
+        block.getFromTempArray();
     },
 
     /**
@@ -77,25 +95,19 @@ let block = {
         for (let i = 0; i < block.size; i++) {
             let j = 0;
             // ищем кирпичик блока в ряду i слева направо
-            while (container.array[i + block.row][j + block.col] !== block.type
-                && j < block.size) {
+            while (block.getCell(i, j) !== block.type && j < block.size) {
                 j++;
             }
             if (j < block.size) {
                 // ищем границу блока в ряду i
-                while (container.array[i + block.row][j + block.col] === block.type) {
+                while (block.getCell(i, j) === block.type) {
                     j++;
                 }
                 // если справа от блока есть препятствие (не ноль), то не free
-                free = !(container.array[i + block.row][j + block.col] !== 0);
+                free = !(block.getCell(i, j) !== 0);
             }
         }
-        if (free) {
-            block.copyToTempArray();
-            block.clearCurrent();
-            block.col++;
-            block.getFromTempArray();
-        }
+        if (free) block.moveAction(block.row, block.col + 1);
     },
 
     /**
@@ -107,56 +119,61 @@ let block = {
         for (let i = 0; i < block.size; i++) {
             let j = block.size - 1;
             // ищем кирпичик блока в ряду i справа налево
-            while (container.array[i + block.row][j + block.col] !== block.type
-                && j > 0) {
+            while (block.getCell(i, j) !== block.type && j > 0) {
                 j--;
             }
             if (j > 0) {
                 // ищем границу блока в ряду i
-                while (container.array[i + block.row][j + block.col] === block.type) {
+                while (block.getCell(i, j) === block.type) {
                     j--;
                 }
                 // если слева от блока есть препятствие (не ноль), то не free
-                free = !(container.array[i + block.row][j + block.col] !== 0);
+                free = !(block.getCell(i, j) !== 0);
             }
         }
-        if (free) {
-            block.copyToTempArray();
-            block.clearCurrent();
-            block.col--;
-            block.getFromTempArray();
-        }
+        if (free) block.moveAction(block.row, block.col - 1);
     },
 
     /**
      * Сдвигает блок вниз
+     * @returns {boolean} true, если блок достиг дна
      */
     shiftDown() {
         let free = true;
         // Проверяем, есть ли препятствие снизу
         for (let j = 0; j < block.size; j++) {
             let i = 0;
-            // ищем кирпичик блока в столбце j сверзу вниз
-            while (container.array[i + block.row][j + block.col] !== block.type
+            // ищем кирпичик блока в столбце j сверху вниз
+            while (block.getCell(i, j) !== block.type
                 && j < block.size) {
                 i++;
             }
             if (j < block.size) {
                 // ищем границу блока в столбце j
-                while (container.array[i + block.row][j + block.col] === block.type) {
-                    if (i + block.row < config.rowsCount) i++;
-                    lo
+                while (block.getCell(i, j) === block.type) {
+                    i++;
                 }
                 // если снизу от блока есть препятствие (не ноль), то не free
-                free = !(container.array[i + block.row][j + block.col] !== 0);
+                free = !(block.getCell(i, j) !== 0);
             }
         }
         if (free) {
-            block.copyToTempArray();
-            block.clearCurrent();
-            block.row++;
-            block.getFromTempArray();
+            block.moveAction(block.row + 1, block.col);
+            return false;
+        } else {
+            for (let i = 0; i < block.size; i++) {
+                for (let j = 0; j < block.size; j++) {
+                    if (block.getCell(i, j) === block.type) {
+                        block.setCell(i, j, block.type + 100);
+                    }
+                }
+            }
+            return true;
         }
+    },
+
+    dropDown() {
+        while (!block.shiftDown()) { }
     },
 
     /**
@@ -190,8 +207,7 @@ let block = {
         for (let i = 0; i < block.size; i++) {
             for (let j = 0; j < block.size; j++) {
                 if (nextBlock.array[i][j] === block.type) {
-                    container.array[i + block.row][j + block.col]
-                        = nextBlock.array[i][j]; // [row][col]
+                    block.setCell(i, j, nextBlock.array[i][j]); // [row][col]
                 }
             }
         }

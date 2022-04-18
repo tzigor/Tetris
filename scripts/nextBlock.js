@@ -1,3 +1,5 @@
+"use strict";
+
 let nextBlock = {
     size: 0,
     type: 0,
@@ -91,7 +93,7 @@ let nextBlock = {
                 nextBlock.array[0][0] = nextBlock.type;
                 nextBlock.array[1][0] = nextBlock.type;
                 nextBlock.array[1][2] = nextBlock.type;
-                bnextBlocklock.size = 3;
+                nextBlock.size = 3;
                 break;
             case 3:
                 nextBlock.array[0][2] = nextBlock.type;

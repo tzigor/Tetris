@@ -1,3 +1,5 @@
+"use strict";
+
 container.draw();
 nextBlock.draw();
 nextBlock.create();

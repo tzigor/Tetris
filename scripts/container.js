@@ -1,3 +1,5 @@
+"use strict";
+
 let container = {
 
     array: [],
@@ -11,6 +13,19 @@ let container = {
             for (let j = 0; j < config.colsCount; j++) {
                 this.array[i][j] = 0; // [row][col]
             }
+        }
+    },
+
+    getCell(row, col) {
+        if (row < config.rowsCount && col < config.colsCount) {
+            return this.array[row][col];
+        }
+        return 255;
+    },
+
+    setCell(row, col, t) {
+        if (row < config.rowsCount && col < config.colsCount) {
+            this.array[row][col] = t;
         }
     },
 
@@ -37,6 +52,15 @@ let container = {
             board += "</tr>";
         }
         return `<table><tbody>${board}</tbody></table>`;
+    },
+
+    clearBottom() {
+        let full = true;
+        for (let i = config.rowsCount - 1; i >= 0; i--) {
+            for (let j = 0; j < config.colsCount; j++) {
+                if (this.array)
+            }
+        }
     },
 
     /**
@@ -66,7 +90,12 @@ let container = {
     drawArray() {
         for (let row = 0; row < config.rowsCount; row++) {
             for (let col = 0; col < config.colsCount; col++) {
-                this.drawSquare(row, col, this.array[row][col]);
+                if (this.array[row][col] > 100) {
+                    this.drawSquare(row, col, this.array[row][col] - 100);
+                } else {
+                    this.drawSquare(row, col, this.array[row][col]);
+                }
+
             }
         }
     },
