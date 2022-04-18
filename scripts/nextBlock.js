@@ -10,13 +10,15 @@ let nextBlock = {
         [0, 0, 0, 0]
     ],
 
-    clearArray() {
+    clear() {
         for (let row = 0; row < 4; row++) {
             for (let col = 0; col < 4; col++) {
                 this.array[row][col] = 0;
+                this.drawSquare(row, col, 0);
             }
         }
     },
+
 
     /**
      * Рисует поле Next Block.
@@ -79,7 +81,7 @@ let nextBlock = {
      * Метод создает следующий блок типа type.
      */
     create() {
-        nextBlock.clearArray();
+        nextBlock.clear();
         nextBlock.type = Math.floor(Math.random() * config.blocksCount) + 1;
         nextBlock.array[1][1] = nextBlock.type; // всегда есть
         switch (nextBlock.type) {

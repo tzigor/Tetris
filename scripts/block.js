@@ -104,7 +104,10 @@ let block = {
                     j++;
                 }
                 // если справа от блока есть препятствие (не ноль), то не free
-                free = !(block.getCell(i, j) !== 0);
+                if (block.getCell(i, j) !== 0) {
+                    free = false;
+                    i = block.size;
+                }
             }
         }
         if (free) block.moveAction(block.row, block.col + 1);
@@ -128,7 +131,10 @@ let block = {
                     j--;
                 }
                 // если слева от блока есть препятствие (не ноль), то не free
-                free = !(block.getCell(i, j) !== 0);
+                if (block.getCell(i, j) !== 0) {
+                    free = false;
+                    i = block.size;
+                }
             }
         }
         if (free) block.moveAction(block.row, block.col - 1);
@@ -140,21 +146,24 @@ let block = {
      */
     shiftDown() {
         let free = true;
+        let spaceEnough = true;
         // Проверяем, есть ли препятствие снизу
         for (let j = 0; j < block.size; j++) {
             let i = 0;
-            // ищем кирпичик блока в столбце j сверху вниз
-            while (block.getCell(i, j) !== block.type
-                && j < block.size) {
+            // ищем кирпичик блока в столбце j сверху вниз 
+            while (block.getCell(i, j) !== block.type && i < block.size) {
                 i++;
             }
-            if (j < block.size) {
+            if (i < block.size) {
                 // ищем границу блока в столбце j
                 while (block.getCell(i, j) === block.type) {
                     i++;
                 }
                 // если снизу от блока есть препятствие (не ноль), то не free
-                free = !(block.getCell(i, j) !== 0);
+                if (block.getCell(i, j) !== 0) {
+                    free = false;
+                    j = block.size;
+                }
             }
         }
         if (free) {
@@ -167,6 +176,19 @@ let block = {
                         block.setCell(i, j, block.type + 100);
                     }
                 }
+            }
+            container.clearBottom();
+            // проверяем, есть ли место для создания блока
+            for (let j = 0; j < nextBlock.size; j++) {
+                if (container.getCell(1,
+                    (Math.trunc(config.colsCount / 2) - nextBlock.size + 2) + j) !== 0) spaceEnough = false;
+            }
+            if (spaceEnough) {
+                block.create();
+                nextBlock.create();
+            } else {
+                alert('Game Over!');
+                game.new();
             }
             return true;
         }
@@ -188,8 +210,8 @@ let block = {
             // Копируем блок из временного массива с разворотом
             for (let i = 0; i < block.size; i++) {
                 for (let j = 0; j < block.size; j++) {
-                    container.array[j + block.row][block.size - i - 1 + block.col]
-                        = block.tempArray[i][j]; // [row][col]
+                    container.setCell(j + block.row,
+                        block.size - i - 1 + block.col, block.tempArray[i][j]);
                 }
             }
             block.draw();

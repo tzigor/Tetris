@@ -16,6 +16,15 @@ let container = {
         }
     },
 
+    clear() {
+        for (let i = 0; i < config.rowsCount; i++) {
+            for (let j = 0; j < config.colsCount; j++) {
+                this.array[i][j] = 0; // [row][col]
+            }
+        }
+        this.drawArray();
+    },
+
     getCell(row, col) {
         if (row < config.rowsCount && col < config.colsCount) {
             return this.array[row][col];
@@ -56,9 +65,18 @@ let container = {
 
     clearBottom() {
         let full = true;
-        for (let i = config.rowsCount - 1; i >= 0; i--) {
+        for (let i = config.rowsCount - 1; i > 0; i--) {
             for (let j = 0; j < config.colsCount; j++) {
-                if (this.array)
+                if (this.array[i][j] < 100) full = false;
+            }
+            if (full) {
+                for (let jd = 0; jd < config.colsCount; jd++) {
+                    for (let id = i; id > 0; id--) {
+                        this.array[id][jd] = this.array[id - 1][jd];
+                    }
+                }
+                this.drawArray();
+                i--;
             }
         }
     },
