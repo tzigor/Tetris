@@ -18,8 +18,29 @@ container.draw();
 nextBlock.draw();
 game.new();
 
-window.addEventListener('keydown', function (event) {
-    action.move(event);
+window.addEventListener('keydown', (event) => action.move(event));
+const buttonGridEl = document.querySelector('.btnGrid');
+buttonGridEl.addEventListener('click', () => {
+    if (buttonGridEl.classList.contains('tableDark')) {
+        buttonGridEl.classList.remove('tableDark');
+        config.theme = 'blockLight';
+    } else {
+        buttonGridEl.classList.add('tableDark');
+        config.theme = 'blockDark';
+    }
+});
+document.getElementById('arrowUp').addEventListener('click', () => block.rotate());
+document.getElementById('arrowDown').addEventListener('click', () => {
+    block.shiftDown();
+    game.score++;
+    document.querySelector('.score').textContent = 'Score : ' + game.score;
+});
+document.getElementById('arrowLeft').addEventListener('click', () => block.shiftLeft());
+document.getElementById('arrowRight').addEventListener('click', () => block.shiftRight());
+document.getElementById('space').addEventListener('click', () => {
+    game.score += config.rowsCount - block.row;
+    block.dropDown();
+    document.querySelector('.score').textContent = 'Score : ' + game.score;
 });
 
 document.querySelector('nav').addEventListener('click', event => {

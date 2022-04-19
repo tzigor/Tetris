@@ -24,8 +24,8 @@ let nextBlock = {
      * @param {n: number} размер блока Next Block - n x n.
      */
     draw() {
-        document.querySelector('.nextBlock').
-            insertAdjacentHTML("afterbegin", this.generate());
+        document.querySelector(".nextHead").
+            insertAdjacentHTML("afterend", this.generate());
     },
 
     /**

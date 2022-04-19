@@ -12,6 +12,7 @@
 }
 
 body {
+
     font-family: 'Lato', sans-serif;
 }
 
@@ -36,10 +37,10 @@ body {
 }
 
 .gameBoard {
-    padding-left: 50px;
     display: flex;
     background-color: var(--mainBgColor);
     padding-bottom: 30px;
+    justify-content: center;
 }
 
 .gameContainer {}
@@ -52,9 +53,7 @@ body {
     flex-direction: column;
 }
 
-.nextBlock {
-    margin-top: 20px;
-}
+.nextBlock {}
 
 .sizeSelector {
     display: flex;
@@ -114,29 +113,46 @@ body {
     background-color: rgb(10, 0, 153);
 }
 
+.tableLight {
+    background-color: var(--bordBgColor);
+}
+
+.tableDark {
+    background-color: rgb(48, 48, 48);
+}
+
 .large {
     width: 30px;
     height: 30px;
-    background-color: var(--bordBgColor);
     border: 1px solid rgb(124, 187, 255);
 }
 
 .medium {
     width: 25px;
     height: 25px;
-    background-color: var(--bordBgColor);
     border: 1px solid rgb(124, 187, 255);
 }
 
 .small {
     width: 20px;
     height: 20px;
-    background-color: var(--bordBgColor);
     border: 1px solid rgb(124, 187, 255);
 }
 
-.next {
+.nextHead {
     font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btnGrid {
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    align-self: center;
+}
+
+.imgGrid {
+    width: 40px;
 }
 
 .btnNewGame {
@@ -146,6 +162,7 @@ body {
     align-self: center;
     font-size: 24px;
     color: blue;
+    margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid rgb(153, 153, 153);
 }
@@ -205,8 +222,12 @@ table {
     background-color: rgb(77, 77, 77);
 }
 
-.block0 {
+.blockLight {
     background: rgb(248, 250, 252);
+}
+
+.blockDark {
+    background: rgb(48, 48, 48);
 }
 
 .block0Next {
@@ -251,4 +272,20 @@ table {
     padding-left: 30px;
     font-size: 14px;
     line-height: 14px;
+}
+
+@media (max-width: 568px) {
+    .gameBoard {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nextBlock {
+        display: none;
+    }
+
+    .navigation {
+        margin-left: 0;
+        margin-top: 30px;
+    }
 }
