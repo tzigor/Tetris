@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <header class="header">Tetris</header>
     <div class="score">Score : 0</div>
     <div class="gameBoard">
@@ -18,16 +19,50 @@
             <p class="next">Next Block</p>
             <div class="nextBlock"></div>
             <div class="sizeSelector">
-                <div class="size sizeSelected">20 x 10</div>
-                <div class="size">25 x 15</div>
-                <div class="size">30 x 20</div>
+                <div class="bordSize sizeSelected">20 x 10</div>
+                <div class="bordSize">25 x 15</div>
+                <div class="bordSize">30 x 20</div>
             </div>
-
+            <div class="cellSelector">
+                <div id="L" class="cellSize cellSelected">
+                    <div class="large"></div>
+                    L
+                </div>
+                <div id="M" class="cellSize">
+                    <div class="medium"></div>
+                    M
+                </div>
+                <div id="S" class="cellSize">
+                    <div class="small"></div>
+                    S
+                </div>
+            </div>
             <button class="btnNewGame">New Game</button>
+            <div class="controls">
+                <button class="btnArrow">
+                    <img class="imgSize" src="pics/arrow-up.svg" alt="">
+                </button>
+                <div class="arowContols">
+                    <button class="btnArrow">
+                        <img class="imgSize" src="pics/arrow-left.svg" alt="">
+                    </button>
+                    <button class="btnArrow">
+                        <img class="imgSize" src="pics/arrow-down.svg" alt="">
+                    </button>
+                    <button class="btnArrow">
+                        <img class="imgSize" src="pics/arrow-right.svg" alt="">
+                    </button>
+                </div>
+                <button class="btnSpace">
+                    <img class="imgSize" src="pics/space.svg" alt="">
+                </button>
+            </div>
         </nav>
 
     </div>
     <footer class="footer">© 2022 Igor Tsukanov</footer>
+
+
 
     <script src="scripts/config.js"></script>
     <script src="scripts/container.js"></script>

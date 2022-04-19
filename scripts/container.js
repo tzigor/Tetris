@@ -109,7 +109,7 @@ let container = {
      * @param {c: number} color 
      */
     drawSquare(row, col, c) {
-        const Squareclass = 'block' + c;
+        const Squareclass = config.cellSize + ' ' + config.border + ' block' + c;
         this.getSquare(row, col).classList = Squareclass;
     },
 
