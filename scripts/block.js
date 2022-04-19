@@ -188,6 +188,7 @@ let block = {
                 nextBlock.create();
             } else {
                 alert('Game Over!');
+                clearInterval(game.timerId);
                 game.new();
             }
             return true;

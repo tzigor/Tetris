@@ -1,6 +1,8 @@
 "use strict";
+
 let game = {
     score: 0,
+    timerId: 0,
     new() {
         document.querySelector('table').remove();
         container.draw();
@@ -10,13 +12,14 @@ let game = {
         nextBlock.create();
         block.create();
         document.querySelector('.score').textContent = 'Score : 0';
-        //let timerId = setInterval(block.shiftDown, config.timeInterval);
+        this.timerId = setInterval(block.shiftDown, config.timeInterval);
     },
 };
 
 container.draw();
 nextBlock.draw();
-game.new();
+container.clear();
+nextBlock.clear();
 
 window.addEventListener('keydown', (event) => action.move(event));
 const buttonGridEl = document.querySelector('.btnGrid');
@@ -45,6 +48,7 @@ document.getElementById('space').addEventListener('click', () => {
 
 document.querySelector('nav').addEventListener('click', event => {
     if (event.target.classList.contains('btnNewGame')) {
+        clearInterval(game.timerId);
         game.new();
     }
     if (event.target.classList.contains('bordSize')) {
