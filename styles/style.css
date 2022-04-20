@@ -27,12 +27,23 @@ body {
     line-height: 34px;
 }
 
-.score {
+.info {
     display: flex;
-    align-items: center;
     height: 50px;
-    padding-left: 50px;
+    align-items: center;
     background-color: #cfcfcf;
+}
+
+.score {
+    margin-left: 50px;
+    background-color: inherit;
+    font-size: 26px;
+}
+
+.level {
+    margin-left: 100px;
+    color: brown;
+    background-color: inherit;
     font-size: 26px;
 }
 
@@ -162,9 +173,14 @@ body {
     align-self: center;
     font-size: 24px;
     color: blue;
-    margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid rgb(153, 153, 153);
+}
+
+.btnPause {
+    margin-top: 10px;
+    height: 30px;
+    margin-bottom: 20px;
 }
 
 table {

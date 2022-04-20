@@ -7,5 +7,7 @@ let config = {
     border: "tdBorder",
     theme: "blockLight",
     blocksCount: 7, // количество блоков
+    level: 0, // уровень сложности
+    prevLevel: 0, // предыдущий уровень (вспомогательная переменная)
     timeInterval: 1000, // время между перемещением блока вниз
 };

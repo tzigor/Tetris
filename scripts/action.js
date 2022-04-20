@@ -1,6 +1,9 @@
 "use strict";
 
 let action = {
+    /**
+     * Обрабатывает события нажатий клавиш
+     */
     move(event) {
         switch (event.key) {
             case "ArrowUp":
@@ -17,10 +20,11 @@ let action = {
             case "ArrowRight":
                 block.shiftRight();
                 break;
-            case " ":
+            case ' ':
                 game.score += config.rowsCount - block.row;
                 block.dropDown();
                 document.querySelector('.score').textContent = 'Score : ' + game.score;
+                document.activeElement.blur();
                 break;
             default:
                 ;

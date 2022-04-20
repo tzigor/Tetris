@@ -2,7 +2,7 @@
 
 let block = {
     row: 0, // текущее положение блока в игровом массиве (левый верхний угол)
-    col: 0,
+    col: 0, //
     size: 3, // размер блока
     type: 4, // тип блока
     tempArray: [ // временный массив хранит блок, пока производятся вычисления
@@ -12,22 +12,35 @@ let block = {
         [0, 0, 0, 0]
     ],
 
+    /**
+     * Возвращает ячейку текущего блока с проверкой на доступные границы
+     * @returns {number} Содержимое контейнера, либо 255, если row или col
+     * @param {row: number, col: number} позиция ячейки в блоке
+     * выходят за доступные границы
+     */
     getCell(row, col) {
         return container.getCell(row + block.row, col + block.col);
     },
 
+    /**
+     * Заносит содержимое ячейки массива контейнера с проверкой на доступные границы
+     * @param {row: number, col: number} позиция ячейки в блоке
+     * @param {t: number} тип блока
+     */
     setCell(row, col, t) {
         container.setCell(row + block.row, col + block.col, t);
     },
 
+    /**
+     * Чистит временный массив
+     */
     clearTempArray() {
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 4; j++) {
-                block.tempArray[i][j] = 0; // [row][col]
-            }
-        }
+        block.tempArray.forEach(element => element.fill(0));
     },
 
+    /**
+     * Чистит текущий блок в контейнере
+     */
     clearCurrent() {
         for (let i = 0; i < block.size; i++) {
             for (let j = 0; j < block.size; j++) {
@@ -68,6 +81,9 @@ let block = {
         }
     },
 
+    /**
+     * Рисует текущий блок в контейнере
+     */
     draw() {
         for (let i = 0; i < block.size; i++) {
             for (let j = 0; j < block.size; j++) {
@@ -78,6 +94,11 @@ let block = {
         }
     },
 
+    /**
+     * Копирует текущий блок во временный массив, удаляет текущий блок из
+     * контейнера, меняет позицию блока в контейнере, и возвращает туда блок
+     * @param {newRow: number, newCol: number} новая позиция блока в контаре
+     */
     moveAction(newRow, newCol) {
         block.copyToTempArray();
         block.clearCurrent();
@@ -145,6 +166,16 @@ let block = {
      * @returns {boolean} true, если блок достиг дна
      */
     shiftDown() {
+        // при наборе 1000 очков повышаем уровень (ускоряем падение)
+        config.level = Math.trunc(game.score / 1000);
+        if (config.level !== config.prevLevel) {
+            config.timeInterval = 1000 - 200 * config.level
+            clearInterval(game.timerId);
+            game.timerId = setInterval(block.shiftDown, config.timeInterval);
+            document.querySelector('.level').textContent = 'Level : ' + config.level;
+        }
+
+        config.prevLevel = config.level;
         let free = true;
         let spaceEnough = true;
         // Проверяем, есть ли препятствие снизу
@@ -187,14 +218,17 @@ let block = {
                 block.create();
                 nextBlock.create();
             } else {
-                alert('Game Over!');
                 clearInterval(game.timerId);
+                alert('Game Over!');
                 game.new();
             }
             return true;
         }
     },
 
+    /**
+     * Роняет блок на дно
+     */
     dropDown() {
         while (!block.shiftDown()) { }
     },

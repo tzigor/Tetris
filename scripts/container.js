@@ -16,15 +16,20 @@ let container = {
         }
     },
 
+    /**
+     * Очищает массив контейнера, и выводит пустой контейнер на экран (чистит)
+     */
     clear() {
-        for (let i = 0; i < config.rowsCount; i++) {
-            for (let j = 0; j < config.colsCount; j++) {
-                this.array[i][j] = 0; // [row][col]
-            }
-        }
+        this.array.forEach(element => element.fill(0));
         this.drawArray();
     },
 
+    /**
+     * Возвращает ячейку игрового контейнера с проверкой на доступные границы
+     * @param {row: number, col: number} позиция ячейки в контейнере
+     * @returns {number} Содержимое контейнера, либо 255, если row или col
+     * выходят за доступные границы
+     */
     getCell(row, col) {
         if (row < config.rowsCount && col < config.colsCount) {
             return this.array[row][col];
@@ -32,6 +37,11 @@ let container = {
         return 255;
     },
 
+    /**
+     * Заносит ячейку в массива контейнера с проверкой на доступные границы
+     * @param {row: number, col: number} позиция ячейки в контейнере
+     * @param {t: number} тип блока
+     */
     setCell(row, col, t) {
         if (row < config.rowsCount && col < config.colsCount) {
             this.array[row][col] = t;
@@ -63,6 +73,9 @@ let container = {
         return `<table><tbody>${board}</tbody></table>`;
     },
 
+    /**
+     * Метод очищает полностью заполненный ряд в контейнере.
+     */
     clearBottom() {
         let fullsCount = 0;
         for (let i = config.rowsCount - 1; i > 0; i--) {
@@ -81,6 +94,7 @@ let container = {
                 i++;
             }
         }
+        // подсчёт очков за заполненные строки
         if (fullsCount === 1) {
             game.score += 100;
         } else if (fullsCount === 2) {
@@ -96,7 +110,8 @@ let container = {
      * Если ячейка с переданными координатами есть, то возвращается ее объект,
      * а иначе null.
      * @param {x: number, y: number} position
-     * @returns {HTMLTableCellElement|null} объект ячейки если есть, в противном случае null.
+     * @returns {HTMLTableCellElement|null} объект ячейки если есть, 
+     * в противном случае null.
      */
     getSquare(row, col) {
         return document.querySelector(`[data-x="${col}"][data-y="${row}"]`);

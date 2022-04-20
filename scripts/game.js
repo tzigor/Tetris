@@ -1,8 +1,12 @@
 "use strict";
 
 let game = {
-    score: 0,
+    score: 0,  // очки за игру
     timerId: 0,
+
+    /**
+     * Запускает новую игру
+     */
     new() {
         document.querySelector('table').remove();
         container.draw();
@@ -11,27 +15,70 @@ let game = {
         nextBlock.clear();
         nextBlock.create();
         block.create();
+        this.score = 0;
+        config.level = 0;
+        config.prevLevel = 0;
         document.querySelector('.score').textContent = 'Score : 0';
-        this.timerId = setInterval(block.shiftDown, config.timeInterval);
+        document.querySelector('.level').textContent = 'Level : 0';
+        btnPauseEl.textContent = "Pause";
+        game.timerId = setInterval(block.shiftDown, config.timeInterval);
     },
+
+    /**
+     * Отменяет режим паузы
+     */
+    pauseButtonControl(El) {
+        if (El.textContent === 'Continue') {
+            game.timerId = setInterval(block.shiftDown, config.timeInterval);
+            El.textContent = 'Pause';
+        }
+    }
 };
 
+// Инициация при открытии страницы с игрой
 container.draw();
 nextBlock.draw();
 container.clear();
 nextBlock.clear();
 
-window.addEventListener('keydown', (event) => action.move(event));
-const buttonGridEl = document.querySelector('.btnGrid');
-buttonGridEl.addEventListener('click', () => {
-    if (buttonGridEl.classList.contains('tableDark')) {
-        buttonGridEl.classList.remove('tableDark');
+const btnPauseEl = document.querySelector('.btnPause');
+const btnGridEl = document.querySelector('.btnGrid');
+
+// отменяет режим паузы при нажатии любой клавиши
+window.addEventListener('keydown', (event) => {
+    game.pauseButtonControl(btnPauseEl);
+    action.move(event);
+});
+
+// запускает новую игру при нажатии кнопки "New Game"
+document.querySelector('.btnNewGame').addEventListener('click', () => {
+    clearInterval(game.timerId);
+    game.new();
+});
+
+// обрабатывает нажатие кнопки темы (светлая/тёмная)
+btnGridEl.addEventListener('click', () => {
+    if (btnGridEl.classList.contains('tableDark')) {
+        btnGridEl.classList.remove('tableDark');
         config.theme = 'blockLight';
     } else {
-        buttonGridEl.classList.add('tableDark');
+        btnGridEl.classList.add('tableDark');
         config.theme = 'blockDark';
     }
 });
+
+// обрабатывает нажатие кнопки "Pause"
+btnPauseEl.addEventListener('click', () => {
+    if (btnPauseEl.textContent === 'Pause') {
+        clearInterval(game.timerId);
+        btnPauseEl.textContent = 'Continue'
+    } else {
+        btnPauseEl.textContent = 'Pause';
+        game.timerId = setInterval(block.shiftDown, config.timeInterval);
+    }
+});
+
+// обработка кнопок управления движением блока
 document.getElementById('arrowUp').addEventListener('click', () => block.rotate());
 document.getElementById('arrowDown').addEventListener('click', () => {
     block.shiftDown();
@@ -46,11 +93,10 @@ document.getElementById('space').addEventListener('click', () => {
     document.querySelector('.score').textContent = 'Score : ' + game.score;
 });
 
+// обработка другимих элементов управления 
 document.querySelector('nav').addEventListener('click', event => {
-    if (event.target.classList.contains('btnNewGame')) {
-        clearInterval(game.timerId);
-        game.new();
-    }
+
+    // размер контейнера для игры
     if (event.target.classList.contains('bordSize')) {
         document.querySelectorAll('.bordSize').
             forEach(item => item.classList.remove('sizeSelected'));
@@ -70,6 +116,8 @@ document.querySelector('nav').addEventListener('click', event => {
                 break;
         }
     }
+
+    // размер ячеек в контейнере
     if (event.target.classList.contains('cellSize')) {
         document.querySelectorAll('.cellSize').
             forEach(item => item.classList.remove('cellSelected'));
@@ -81,7 +129,6 @@ document.querySelector('nav').addEventListener('click', event => {
         } else if (event.target.textContent.includes("S")) {
             config.cellSize = "tdSizeS";
         }
-
     }
     if (event.target.classList.contains('large')) {
         document.querySelectorAll('.cellSize').

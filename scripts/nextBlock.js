@@ -1,22 +1,21 @@
 "use strict";
 
 let nextBlock = {
-    size: 0,
-    type: 0,
-    array: [ // массив хранит следующий блок
+    size: 0, // размер следующего блока
+    type: 0, // тип следующего блока
+    array: [ // массив хранит следующий блок (4 x 4 - максимальный размер блока)
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ],
 
+    /**
+     * Очищает массив, и чистит "следующий блок" на экране
+     */
     clear() {
-        for (let row = 0; row < 4; row++) {
-            for (let col = 0; col < 4; col++) {
-                this.array[row][col] = 0;
-                this.drawSquare(row, col, 0);
-            }
-        }
+        this.array.forEach(element => element.fill(0));
+        this.drawArray();
     },
 
     /**
@@ -44,13 +43,13 @@ let nextBlock = {
         return `<table><tbody>${board}</tbody></table>`;
     },
 
+    /**
+     * Рисует "следующий блок" на экране
+     */
     drawArray() {
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
-                if (this.array[i][j] === this.type) {
-                    this.drawSquare(i, j, this.type);
-                }
-
+                this.drawSquare(i, j, this.array[i][j]);
             }
         }
     },
