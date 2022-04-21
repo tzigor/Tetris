@@ -62,6 +62,18 @@ body {
     display: none;
 }
 
+.pause {
+    text-align: center;
+    padding-top: 200px;
+    color: white;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    font-size: 64px;
+    font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 .gameOver {
     text-align: center;
     padding-top: 200px;

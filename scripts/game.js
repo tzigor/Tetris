@@ -23,16 +23,6 @@ let game = {
         btnPauseEl.textContent = "Pause";
         game.timerId = setInterval(block.shiftDown, config.timeInterval);
     },
-
-    /**
-     * Отменяет режим паузы
-     */
-    pauseButtonControl(El) {
-        if (El.textContent === 'Continue') {
-            game.timerId = setInterval(block.shiftDown, config.timeInterval);
-            El.textContent = 'Pause';
-        }
-    }
 };
 
 // Инициация при открытии страницы с игрой
@@ -43,12 +33,7 @@ nextBlock.clear();
 
 const btnPauseEl = document.querySelector('.btnPause');
 const btnGridEl = document.querySelector('.btnGrid');
-
-// отменяет режим паузы при нажатии любой клавиши
-window.addEventListener('keydown', (event) => {
-    game.pauseButtonControl(btnPauseEl);
-    action.move(event);
-});
+const pauseEl = document.querySelector('.pause');
 
 // запускает новую игру при нажатии кнопки "New Game"
 document.querySelector('.btnNewGame').addEventListener('click', () => {
@@ -68,14 +53,18 @@ btnGridEl.addEventListener('click', () => {
 });
 
 // обрабатывает нажатие кнопки "Pause"
-btnPauseEl.addEventListener('click', () => {
-    if (btnPauseEl.textContent === 'Pause') {
-        clearInterval(game.timerId);
-        btnPauseEl.textContent = 'Continue'
-    } else {
-        btnPauseEl.textContent = 'Pause';
-        game.timerId = setInterval(block.shiftDown, config.timeInterval);
-    }
+btnPauseEl.addEventListener('click', event => {
+    console.log(game.timerId);
+    clearInterval(game.timerId);
+    pauseEl.classList.remove('hide');
+    event.stopPropagation();
+    window.addEventListener('click', () => {
+        if (!pauseEl.classList.contains('hide')) {
+            pauseEl.classList.add('hide');
+            game.timerId = setInterval(block.shiftDown, config.timeInterval);
+            console.log(game.timerId);
+        }
+    });
 });
 
 // обработка кнопок управления движением блока

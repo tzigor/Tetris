@@ -218,6 +218,7 @@ let block = {
                 block.create();
                 nextBlock.create();
             } else {
+                // свободного места нет, Game Over
                 clearInterval(game.timerId);
                 document.querySelector('.gameOver').classList.remove('hide');
                 window.addEventListener('click',
