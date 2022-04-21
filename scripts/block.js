@@ -167,15 +167,15 @@ let block = {
      */
     shiftDown() {
         // при наборе 1000 очков повышаем уровень (ускоряем падение)
-        config.level = Math.trunc(game.score / 1000);
+        config.level = Math.trunc(game.score / 3000);
         if (config.level !== config.prevLevel) {
             config.timeInterval = 1000 - 200 * config.level
             clearInterval(game.timerId);
             game.timerId = setInterval(block.shiftDown, config.timeInterval);
             document.querySelector('.level').textContent = 'Level : ' + config.level;
         }
-
         config.prevLevel = config.level;
+
         let free = true;
         let spaceEnough = true;
         // Проверяем, есть ли препятствие снизу
@@ -219,8 +219,9 @@ let block = {
                 nextBlock.create();
             } else {
                 clearInterval(game.timerId);
-                alert('Game Over!');
-                game.new();
+                document.querySelector('.gameOver').classList.remove('hide');
+                window.addEventListener('click',
+                    () => document.querySelector('.gameOver').classList.add('hide'));
             }
             return true;
         }
