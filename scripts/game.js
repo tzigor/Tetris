@@ -20,7 +20,6 @@ let game = {
         config.prevLevel = 0;
         document.querySelector('.score').textContent = 'Score : 0';
         document.querySelector('.level').textContent = 'Level : 0';
-        btnPauseEl.textContent = "Pause";
         game.timerId = setInterval(block.shiftDown, config.timeInterval);
     },
 };
@@ -34,6 +33,9 @@ nextBlock.clear();
 const btnPauseEl = document.querySelector('.btnPause');
 const btnGridEl = document.querySelector('.btnGrid');
 const pauseEl = document.querySelector('.pause');
+
+// обработка нажатий клавиш управления
+window.addEventListener('keydown', (event) => action.move(event));
 
 // запускает новую игру при нажатии кнопки "New Game"
 document.querySelector('.btnNewGame').addEventListener('click', () => {
@@ -54,7 +56,6 @@ btnGridEl.addEventListener('click', () => {
 
 // обрабатывает нажатие кнопки "Pause"
 btnPauseEl.addEventListener('click', event => {
-    console.log(game.timerId);
     clearInterval(game.timerId);
     pauseEl.classList.remove('hide');
     event.stopPropagation();
@@ -62,7 +63,6 @@ btnPauseEl.addEventListener('click', event => {
         if (!pauseEl.classList.contains('hide')) {
             pauseEl.classList.add('hide');
             game.timerId = setInterval(block.shiftDown, config.timeInterval);
-            console.log(game.timerId);
         }
     });
 });
