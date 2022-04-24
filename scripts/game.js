@@ -51,7 +51,8 @@ btnGridEl.addEventListener('click', () => {
     } else {
         btnGridEl.classList.add('tableDark');
         config.theme = 'blockDark';
-    }
+    };
+    container.drawArray();
 });
 
 // обрабатывает нажатие кнопки "Pause"
