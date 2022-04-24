@@ -33,6 +33,7 @@ nextBlock.clear();
 const btnPauseEl = document.querySelector('.btnPause');
 const btnGridEl = document.querySelector('.btnGrid');
 const pauseEl = document.querySelector('.pause');
+const tableEl = document.querySelector('tab');
 
 // обработка нажатий клавиш управления
 window.addEventListener('keydown', (event) => action.move(event));

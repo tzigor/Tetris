@@ -3,6 +3,8 @@
 :root {
     --mainBgColor: #cfcfcf;
     --bordBgColor: rgb(248, 250, 252);
+    --darkBack: rgb(48, 48, 48);
+    --lightBack: rgb(248, 250, 252);
 }
 
 * {
@@ -215,7 +217,14 @@ body {
 
 table {
     border-collapse: collapse;
-    background: var(--bordBgColor);
+}
+
+.tableLight {
+    background: var(--lightBack);
+}
+
+.tableDark {
+    background: var(--DarkBack);
 }
 
 .tdBorder {
@@ -269,43 +278,54 @@ table {
 }
 
 .blockLight {
-    background: rgb(248, 250, 252);
+    background: var(--lightBack);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .blockDark {
-    background: rgb(48, 48, 48);
+    background: var(--darkBack);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.block0Next {
+.nextBlockBG {
     background: var(--mainBgColor);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+.block0 {}
 
 .block1 {
-    background: rgb(19, 165, 0);
+    background-image: url("Green.png");
 }
 
 .block2 {
-    background: rgb(255, 255, 0);
+    background-image: url("Yellow.png");
 }
 
 .block3 {
-    background: rgb(255, 0, 0);
+    background-image: url("Red.png");
 }
 
 .block4 {
-    background: rgb(0, 255, 255);
+    background-image: url("Cian.png");
 }
 
 .block5 {
-    background: rgb(255, 166, 0);
+    background-image: url("Brown.png");
 }
 
 .block6 {
-    background: rgb(253, 1, 178);
+    background-image: url("Pink.png");
 }
 
 .block7 {
-    background: rgb(0, 4, 255);
+    background-image: url("Blue.png");
 }
 
 .footer {

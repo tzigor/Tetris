@@ -220,9 +220,9 @@ let block = {
             } else {
                 // свободного места нет, Game Over
                 clearInterval(game.timerId);
-                document.querySelector('.gameOver').classList.remove('hide');
-                window.addEventListener('click',
-                    () => document.querySelector('.gameOver').classList.add('hide'));
+                const gameOverEl = document.querySelector('.gameOver');
+                gameOverEl.classList.remove('hide');
+                window.addEventListener('click', () => gameOverEl.classList.add('hide'));
             }
             return true;
         }

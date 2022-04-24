@@ -71,8 +71,9 @@ let nextBlock = {
      * @param {c: number} color 
      */
     drawSquare(row, col, c) {
-        let Squareclass = 'tdSizeL tdBorder block' + c;
-        if (c === 0) Squareclass = 'tdSizeL tdBorder block block0Next';
+        let Squareclass = 'tdSizeL tdBorder nextBlockBG' + ' block' + c;
+
+        //  if (c === 0) Squareclass = 'tdSizeL tdBorder block block0Next';
         this.getSquare(row, col).classList = Squareclass;
     },
 

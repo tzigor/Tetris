@@ -70,7 +70,7 @@ let container = {
             }
             board += "</tr>";
         }
-        return `<table><tbody>${board}</tbody></table>`;
+        return `<table class="tableLight" ><tbody>${board}</tbody></table>`;
     },
 
     /**
@@ -124,10 +124,7 @@ let container = {
      * @param {c: number} color 
      */
     drawSquare(row, col, c) {
-        let Squareclass = config.cellSize + ' ' + config.border + ' block' + c;
-        if (c === 0) {
-            Squareclass = config.cellSize + ' ' + config.border + ' ' + config.theme;
-        }
+        let Squareclass = config.cellSize + ' ' + config.border + ' ' + config.theme + ' block' + c;
         this.getSquare(row, col).classList = Squareclass;
     },
 
