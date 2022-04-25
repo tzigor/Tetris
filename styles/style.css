@@ -25,7 +25,7 @@ body {
     height: 50px;
     padding-left: 50px;
     color: blue;
-    background-color: azure;
+    background-color: rgb(238, 244, 255);
     font-size: 34px;
     line-height: 34px;
 }
@@ -56,10 +56,16 @@ body {
     padding-bottom: 30px;
     justify-content: center;
     position: relative;
+    background-image: url("back1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .gameContainer {
     margin-right: 30px;
+    margin-top: 20px;
+    ;
 }
 
 .hide {
@@ -115,11 +121,13 @@ body {
     color: black;
     border-radius: 5px;
     background-color: var(--mainBgColor);
+    opacity: 0.5;
     border: 1px solid rgb(153, 153, 153);
 }
 
 .sizeSelected {
     background-color: white;
+    opacity: 1;
 }
 
 .cellSelector {
@@ -140,6 +148,7 @@ body {
     align-items: center;
     border-radius: 5px;
     background-color: var(--mainBgColor);
+    opacity: 0.5;
     border: 1px solid rgb(153, 153, 153);
 }
 
@@ -151,6 +160,7 @@ body {
     margin-top: 3px;
     border-radius: 5px;
     background-color: var(--mainBgColor);
+    opacity: 0.5;
     border: 1px solid rgb(153, 153, 153);
 }
 
@@ -162,11 +172,13 @@ body {
     margin-top: 3px;
     border-radius: 5px;
     background-color: var(--mainBgColor);
+    opacity: 0.5;
     border: 1px solid rgb(153, 153, 153);
 }
 
 .checkedSize {
     background-color: white;
+    opacity: 1;
 }
 
 .largeImg {
@@ -182,7 +194,8 @@ body {
 }
 
 .nextHead {
-    font-size: 18px;
+    color: white;
+    font-size: 24px;
     margin-bottom: 20px;
 }
 
@@ -300,7 +313,7 @@ table {
 }
 
 .nextBlockBG {
-    background: var(--mainBgColor);
+    /*background: var(--mainBgColor);*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
