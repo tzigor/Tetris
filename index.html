@@ -12,7 +12,7 @@
 <body>
     <div class="game">
         <header class="header">Tetris</header>
-        <div class="info">
+        <div class="info hide">
             <span class="score">Score : 0</span>
             <span class="level">Level : 0</span>
         </div>
@@ -22,52 +22,52 @@
             <div class="gameContainer">
             </div>
             <nav class="navigation">
-                <div class="nextBlock">
+                <div class="nextBlock hide">
                     <p class="nextHead">Next Block</p>
                 </div>
                 <div class="sizeSelector">
-                    <div class="bordSize sizeSelected">20 x 10</div>
-                    <div class="bordSize">25 x 15</div>
-                    <div class="bordSize">30 x 20</div>
+                    <div class="bordSize sizeSelected" data-size="20x10">20 х 10</div>
+                    <div class="bordSize" data-size="25x15">25 x 15</div>
+                    <div class="bordSize " data-size="30x20">30 x 20</div>
                 </div>
                 <div class="cellSelector">
-                    <div id="L" class="cellSize cellSelected">
-                        <div class="large"></div>
-                        L
-                    </div>
-                    <div id="M" class="cellSize">
-                        <div class="medium"></div>
-                        M
-                    </div>
-                    <div id="S" class="cellSize">
-                        <div class="small"></div>
-                        S
-                    </div>
+                    <button class="large checkedSize">
+                        <img class="largeImg" src="pics/30x30.png" alt="">
+                    </button>
+                    <button class="medium">
+                        <img class="mediumImg" src="pics/25x25.png" alt="">
+                    </button>
+                    <button class="small">
+                        <img class="smallImg" src="pics/20x20.png" alt="">
+                    </button>
                 </div>
-                <button class="btnGrid tableLight">
+                <button class="btnGrid">
                     <img class="imgGrid" src="pics/grid.svg" alt="">
                 </button>
-                <button class="btnNewGame">New Game</button>
-                <button class="btnPause">Pause</button>
-                <div class="controls">
-                    <button id="arrowUp" class="btnArrow">
-                        <img class="imgSize" src="pics/arrow-up.svg" alt="">
-                    </button>
-                    <div class="arowContols">
-                        <button id="arrowLeft" class="btnArrow">
-                            <img class="imgSize" src="pics/arrow-left.svg" alt="">
+                <button class="btnNewGame">Start</button>
+                <div class="lowerNav hide">
+                    <button class="btnPause">Pause</button>
+                    <div class="controls">
+                        <button id="arrowUp" class="btnArrow">
+                            <img class="imgSize" src="pics/arrow-up.svg" alt="">
                         </button>
-                        <button id="arrowDown" class="btnArrow">
-                            <img class="imgSize" src="pics/arrow-down.svg" alt="">
-                        </button>
-                        <button id="arrowRight" class="btnArrow">
-                            <img class="imgSize" src="pics/arrow-right.svg" alt="">
+                        <div class="arowContols">
+                            <button id="arrowLeft" class="btnArrow">
+                                <img class="imgSize" src="pics/arrow-left.svg" alt="">
+                            </button>
+                            <button id="arrowDown" class="btnArrow">
+                                <img class="imgSize" src="pics/arrow-down.svg" alt="">
+                            </button>
+                            <button id="arrowRight" class="btnArrow">
+                                <img class="imgSize" src="pics/arrow-right.svg" alt="">
+                            </button>
+                        </div>
+                        <button id="space" class="btnSpace">
+                            <img class="imgSize" src="pics/space.svg" alt="">
                         </button>
                     </div>
-                    <button id="space" class="btnSpace">
-                        <img class="imgSize" src="pics/space.svg" alt="">
-                    </button>
                 </div>
+
             </nav>
 
         </div>

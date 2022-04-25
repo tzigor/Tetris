@@ -169,7 +169,7 @@ let block = {
         // при наборе 1000 очков повышаем уровень (ускоряем падение)
         config.level = Math.trunc(game.score / 3000);
         if (config.level !== config.prevLevel) {
-            config.timeInterval = 1000 - 200 * config.level
+            if (config.level < 5) config.timeInterval = 1000 - 200 * config.level;
             clearInterval(game.timerId);
             game.timerId = setInterval(block.shiftDown, config.timeInterval);
             document.querySelector('.level').textContent = 'Level : ' + config.level;
@@ -222,6 +222,7 @@ let block = {
                 clearInterval(game.timerId);
                 const gameOverEl = document.querySelector('.gameOver');
                 gameOverEl.classList.remove('hide');
+                game.stop();
                 window.addEventListener('click', () => gameOverEl.classList.add('hide'));
             }
             return true;
