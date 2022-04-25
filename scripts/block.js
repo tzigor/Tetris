@@ -240,19 +240,32 @@ let block = {
      * Вращает блок по часовой стрелки
      */
     rotate() {
+        let free = true;
         if ((block.row + block.size - 1) < config.rowsCount) {
             if (block.col < 0) block.shiftRight();
             if (block.col > config.colsCount - block.size) block.shiftLeft();
-            block.copyToTempArray();
-            block.clearCurrent();
-            // Копируем блок из временного массива с разворотом
+
+            // проверяем, есть ли место для разворота
             for (let i = 0; i < block.size; i++) {
-                for (let j = 0; j < block.size; j++) {
-                    container.setCell(j + block.row,
-                        block.size - i - 1 + block.col, block.tempArray[i][j]);
-                }
+                if (block.getCell(i, 0) !== 0 && block.getCell(i, 0) !== block.type)
+                    free = false;
+                if (block.getCell(i, block.size - 1) !== 0 && block.getCell(i, block.size - 1) !== block.type)
+                    free = false;
             }
-            block.draw();
+
+            if (free) {
+                block.copyToTempArray();
+                block.clearCurrent();
+                // Копируем блок из временного массива с разворотом
+                for (let i = 0; i < block.size; i++) {
+                    for (let j = 0; j < block.size; j++) {
+                        container.setCell(j + block.row,
+                            block.size - i - 1 + block.col, block.tempArray[i][j]);
+                    }
+                }
+                block.draw();
+            }
+
         }
     },
 

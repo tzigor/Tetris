@@ -61,11 +61,8 @@ window.addEventListener('keydown', (event) => action.move(event));
 
 // запускает новую игру при нажатии кнопки "New Game"
 newBtnEl.addEventListener('click', () => {
-    if (game.active) {
-        game.stop();
-    } else {
-        game.new();
-    }
+    if (game.active) game.stop();
+    else game.new();
 });
 
 // обрабатывает нажатие кнопки темы (светлая/тёмная)
