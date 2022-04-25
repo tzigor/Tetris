@@ -9,7 +9,6 @@ let game = {
      * Запускает новую игру
      */
     new() {
-        clearInterval(game.timerId);
         container.draw();
         container.clear();
         this.score = 0;
@@ -32,6 +31,7 @@ let game = {
     },
 
     stop() {
+        clearInterval(game.timerId);
         document.querySelector('.info').classList.add('hide');
         document.querySelector('.lowerNav').classList.add('hide');
         document.querySelector('.sizeSelector').classList.remove('hide');
@@ -128,7 +128,6 @@ document.querySelector('nav').addEventListener('click', event => {
                 break;
         }
     }
-
     // размер ячеек в контейнере
     largeBtn.classList.remove('checkedSize');
     mediumBtn.classList.remove('checkedSize');
@@ -148,5 +147,5 @@ document.querySelector('nav').addEventListener('click', event => {
     if (config.cellSize === "tdSizeS") smallBtn.classList.add('checkedSize');
 
     // после изменений перерисовываем игровой контейнер
-    container.drawArray();
+    if (game.active) container.drawArray();
 });

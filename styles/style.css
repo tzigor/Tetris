@@ -58,7 +58,9 @@ body {
     position: relative;
 }
 
-.gameContainer {}
+.gameContainer {
+    margin-right: 30px;
+}
 
 .hide {
     display: none;
@@ -91,7 +93,6 @@ body {
 .navigation {
     height: inherit;
     width: 200px;
-    margin-left: 30px;
     display: flex;
     flex-direction: column;
 }
@@ -110,17 +111,15 @@ body {
     align-items: center;
     margin-top: 3px;
     height: 30px;
-    font-size: 14px;
-    line-height: 14px;
-    background-color: aliceblue;
+    font-size: 18px;
+    color: black;
     border-radius: 5px;
-    color: deepskyblue;
-    border: 1px solid rgb(124, 187, 255);
+    background-color: var(--mainBgColor);
+    border: 1px solid rgb(153, 153, 153);
 }
 
 .sizeSelected {
-    color: aliceblue;
-    background-color: rgb(10, 0, 153);
+    background-color: white;
 }
 
 .cellSelector {
@@ -135,14 +134,20 @@ body {
 }
 
 .large {
-    height: 40px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
     background-color: var(--mainBgColor);
     border: 1px solid rgb(153, 153, 153);
 }
 
 .medium {
-    height: 40px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 3px;
     border-radius: 5px;
     background-color: var(--mainBgColor);
@@ -150,8 +155,11 @@ body {
 }
 
 .small {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 3px;
-    height: 40px;
     border-radius: 5px;
     background-color: var(--mainBgColor);
     border: 1px solid rgb(153, 153, 153);
@@ -198,7 +206,8 @@ body {
     font-size: 24px;
     color: blue;
     border-radius: 5px;
-    border: 1px solid rgb(153, 153, 153);
+    border: 2px solid white;
+    border-style: outset;
 }
 
 .btnPause {
@@ -208,7 +217,8 @@ body {
     font-size: 18px;
     margin-bottom: 20px;
     border-radius: 5px;
-    border: 1px solid rgb(153, 153, 153);
+    border: 2px solid white;
+    border-style: outset;
 }
 
 table {
@@ -332,7 +342,7 @@ table {
     align-items: center;
     height: 30px;
     background-color: black;
-    color: gainsboro;
+    color: rgb(189, 189, 189);
     padding-left: 30px;
     font-size: 14px;
     line-height: 14px;

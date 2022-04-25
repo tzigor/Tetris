@@ -124,8 +124,11 @@ let container = {
      * @param {c: number} color 
      */
     drawSquare(row, col, c) {
-        let Squareclass = config.cellSize + ' ' + config.border + ' ' + config.theme + ' block' + c;
-        this.getSquare(row, col).classList = Squareclass;
+        const square = this.getSquare(row, col);
+        if (square !== null) {
+            let Squareclass = config.cellSize + ' ' + config.border + ' ' + config.theme + ' block' + c;
+            square.classList = Squareclass;
+        }
     },
 
     /**
