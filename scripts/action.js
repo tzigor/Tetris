@@ -1,6 +1,6 @@
 "use strict";
 
-let action = {
+const action = {
     gameOverEl: document.querySelector('.gameOver'),
 
     /**

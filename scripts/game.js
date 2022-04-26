@@ -1,6 +1,6 @@
 "use strict";
 
-let game = {
+const game = {
     score: 0,  // очки за игру
     timerId: 0,
     active: false,
@@ -19,12 +19,15 @@ let game = {
         config.level = 0;
         config.prevLevel = 0;
         config.timeInterval = 1000;
+        // Инициализируем экран новой игры. Прячем, что не недо, и
+        // показываем то, что надо
         document.querySelector('.score').textContent = 'Score : 0';
         document.querySelector('.level').textContent = 'Level : 0';
         document.querySelector('.sizeSelector').classList.add('hide');
         document.querySelector('.nextBlock').classList.remove('hide');
         document.querySelector('.info').classList.remove('hide');
         document.querySelector('.lowerNav').classList.remove('hide');
+        // Запускаем метод падения блока раз в timeInterval (1 сек)
         game.timerId = setInterval(block.shiftDown.bind(block), config.timeInterval);
         newBtnEl.textContent = 'New Game';
         game.active = true;
