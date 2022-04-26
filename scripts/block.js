@@ -19,7 +19,7 @@ let block = {
      * выходят за доступные границы
      */
     getCell(row, col) {
-        return container.getCell(row + block.row, col + block.col);
+        return container.getCell(row + this.row, col + this.col);
     },
 
     /**
@@ -28,25 +28,25 @@ let block = {
      * @param {t: number} тип блока
      */
     setCell(row, col, t) {
-        container.setCell(row + block.row, col + block.col, t);
+        container.setCell(row + this.row, col + this.col, t);
     },
 
     /**
      * Чистит временный массив
      */
     clearTempArray() {
-        block.tempArray.forEach(element => element.fill(0));
+        this.tempArray.forEach(element => element.fill(0));
     },
 
     /**
      * Чистит текущий блок в контейнере
      */
     clearCurrent() {
-        for (let i = 0; i < block.size; i++) {
-            for (let j = 0; j < block.size; j++) {
-                if (block.tempArray[i][j] === block.type) {
-                    block.setCell(i, j, 0);
-                    container.drawSquare(i + block.row, j + block.col, 0);
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
+                if (this.tempArray[i][j] === this.type) {
+                    this.setCell(i, j, 0);
+                    container.drawSquare(i + this.row, j + this.col, 0);
                 }
             }
         }
@@ -56,12 +56,12 @@ let block = {
      * Копирует текущий блок во временный массив
      */
     copyToTempArray() {
-        block.clearTempArray();
-        for (let i = 0; i < block.size; i++) {
-            for (let j = 0; j < block.size; j++) {
-                if ((i + block.row) < config.rowsCount
-                    && block.getCell(i, j) === block.type) {
-                    block.tempArray[i][j] = block.getCell(i, j);
+        this.clearTempArray();
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
+                if ((i + this.row) < config.rowsCount
+                    && this.getCell(i, j) === this.type) {
+                    this.tempArray[i][j] = this.getCell(i, j);
                 }
             }
         }
@@ -71,11 +71,11 @@ let block = {
      * Возвращает блок из временного массива в игровой массив
      */
     getFromTempArray() {
-        for (let i = 0; i < block.size; i++) {
-            for (let j = 0; j < block.size; j++) {
-                if (block.tempArray[i][j] === block.type) {
-                    block.setCell(i, j, block.tempArray[i][j]);
-                    container.drawSquare(i + block.row, j + block.col, block.type);
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
+                if (this.tempArray[i][j] === this.type) {
+                    this.setCell(i, j, this.tempArray[i][j]);
+                    container.drawSquare(i + this.row, j + this.col, this.type);
                 }
             }
         }
@@ -85,10 +85,10 @@ let block = {
      * Рисует текущий блок в контейнере
      */
     draw() {
-        for (let i = 0; i < block.size; i++) {
-            for (let j = 0; j < block.size; j++) {
-                if (block.getCell(i, j) === block.type) {
-                    container.drawSquare(i + block.row, j + block.col, block.type);
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
+                if (this.getCell(i, j) === this.type) {
+                    container.drawSquare(i + this.row, j + this.col, this.type);
                 }
             }
         }
@@ -100,11 +100,11 @@ let block = {
      * @param {newRow: number, newCol: number} новая позиция блока в контаре
      */
     moveAction(newRow, newCol) {
-        block.copyToTempArray();
-        block.clearCurrent();
-        block.row = newRow;
-        block.col = newCol;
-        block.getFromTempArray();
+        this.copyToTempArray();
+        this.clearCurrent();
+        this.row = newRow;
+        this.col = newCol;
+        this.getFromTempArray();
     },
 
     /**
@@ -113,25 +113,25 @@ let block = {
     shiftRight() {
         let free = true;
         // Проверяем, есть ли препятствие справа
-        for (let i = 0; i < block.size; i++) {
+        for (let i = 0; i < this.size; i++) {
             let j = 0;
             // ищем кирпичик блока в ряду i слева направо
-            while (block.getCell(i, j) !== block.type && j < block.size) {
+            while (this.getCell(i, j) !== this.type && j < this.size) {
                 j++;
             }
-            if (j < block.size) {
+            if (j < this.size) {
                 // ищем границу блока в ряду i
-                while (block.getCell(i, j) === block.type) {
+                while (this.getCell(i, j) === this.type) {
                     j++;
                 }
                 // если справа от блока есть препятствие (не ноль), то не free
-                if (block.getCell(i, j) !== 0) {
+                if (this.getCell(i, j) !== 0) {
                     free = false;
-                    i = block.size;
+                    i = this.size;
                 }
             }
         }
-        if (free) block.moveAction(block.row, block.col + 1);
+        if (free) this.moveAction(this.row, this.col + 1);
     },
 
     /**
@@ -140,29 +140,32 @@ let block = {
     shiftLeft() {
         let free = true;
         // Проверяем, есть ли препятствие слева
-        for (let i = 0; i < block.size; i++) {
-            let j = block.size - 1;
+        for (let i = 0; i < this.size; i++) {
+            let j = this.size - 1;
             // ищем кирпичик блока в ряду i справа налево
-            while (block.getCell(i, j) !== block.type && j > 0) {
+            while (this.getCell(i, j) !== this.type && j > 0) {
                 j--;
             }
             if (j > 0) {
                 // ищем границу блока в ряду i
-                while (block.getCell(i, j) === block.type) {
+                while (this.getCell(i, j) === this.type) {
                     j--;
                 }
                 // если слева от блока есть препятствие (не ноль), то не free
-                if (block.getCell(i, j) !== 0) {
+                if (this.getCell(i, j) !== 0) {
                     free = false;
-                    i = block.size;
+                    i = this.size;
                 }
             }
         }
-        if (free) block.moveAction(block.row, block.col - 1);
+        if (free) this.moveAction(this.row, this.col - 1);
     },
 
     /**
      * Сдвигает блок вниз
+     * Так же генерит новый блок при достижении дна предыдущего
+     * Так же отслеживает "событие" конца игры при отсутствии
+     * свободного места для нового блока
      * @returns {boolean} true, если блок достиг дна
      */
     shiftDown() {
@@ -171,7 +174,7 @@ let block = {
         if (config.level !== config.prevLevel) {
             if (config.level < 5) config.timeInterval = 1000 - 200 * config.level;
             clearInterval(game.timerId);
-            game.timerId = setInterval(block.shiftDown, config.timeInterval);
+            game.timerId = setInterval(this.shiftDown, config.timeInterval);
             document.querySelector('.level').textContent = 'Level : ' + config.level;
         }
         config.prevLevel = config.level;
@@ -179,32 +182,32 @@ let block = {
         let free = true;
         let spaceEnough = true;
         // Проверяем, есть ли препятствие снизу
-        for (let j = 0; j < block.size; j++) {
+        for (let j = 0; j < this.size; j++) {
             let i = 0;
             // ищем кирпичик блока в столбце j сверху вниз 
-            while (block.getCell(i, j) !== block.type && i < block.size) {
+            while (this.getCell(i, j) !== this.type && i < this.size) {
                 i++;
             }
-            if (i < block.size) {
+            if (i < this.size) {
                 // ищем границу блока в столбце j
-                while (block.getCell(i, j) === block.type) {
+                while (this.getCell(i, j) === this.type) {
                     i++;
                 }
                 // если снизу от блока есть препятствие (не ноль), то не free
-                if (block.getCell(i, j) !== 0) {
+                if (this.getCell(i, j) !== 0) {
                     free = false;
-                    j = block.size;
+                    j = this.size;
                 }
             }
         }
         if (free) {
-            block.moveAction(block.row + 1, block.col);
+            this.moveAction(this.row + 1, this.col);
             return false;
         } else {
-            for (let i = 0; i < block.size; i++) {
-                for (let j = 0; j < block.size; j++) {
-                    if (block.getCell(i, j) === block.type) {
-                        block.setCell(i, j, block.type + 100);
+            for (let i = 0; i < this.size; i++) {
+                for (let j = 0; j < this.size; j++) {
+                    if (this.getCell(i, j) === this.type) {
+                        this.setCell(i, j, this.type + 100);
                     }
                 }
             }
@@ -215,7 +218,7 @@ let block = {
                     (Math.trunc(config.colsCount / 2) - nextBlock.size + 2) + j) !== 0) spaceEnough = false;
             }
             if (spaceEnough) {
-                block.create();
+                this.create();
                 nextBlock.create();
             } else {
                 // свободного места нет, Game Over
@@ -233,7 +236,7 @@ let block = {
      * Роняет блок на дно
      */
     dropDown() {
-        while (!block.shiftDown()) { }
+        while (!this.shiftDown()) { }
     },
 
     /**
@@ -241,29 +244,29 @@ let block = {
      */
     rotate() {
         let free = true;
-        if ((block.row + block.size - 1) < config.rowsCount) {
-            if (block.col < 0) block.shiftRight();
-            if (block.col > config.colsCount - block.size) block.shiftLeft();
+        if ((this.row + this.size - 1) < config.rowsCount) {
+            if (this.col < 0) this.shiftRight();
+            if (this.col > config.colsCount - this.size) this.shiftLeft();
 
             // проверяем, есть ли место для разворота
-            for (let i = 0; i < block.size; i++) {
-                if (block.getCell(i, 0) !== 0 && block.getCell(i, 0) !== block.type)
+            for (let i = 0; i < this.size; i++) {
+                if (this.getCell(i, 0) !== 0 && this.getCell(i, 0) !== this.type)
                     free = false;
-                if (block.getCell(i, block.size - 1) !== 0 && block.getCell(i, block.size - 1) !== block.type)
+                if (this.getCell(i, this.size - 1) !== 0 && this.getCell(i, this.size - 1) !== this.type)
                     free = false;
             }
 
             if (free) {
-                block.copyToTempArray();
-                block.clearCurrent();
+                this.copyToTempArray();
+                this.clearCurrent();
                 // Копируем блок из временного массива с разворотом
-                for (let i = 0; i < block.size; i++) {
-                    for (let j = 0; j < block.size; j++) {
-                        container.setCell(j + block.row,
-                            block.size - i - 1 + block.col, block.tempArray[i][j]);
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        container.setCell(j + this.row,
+                            this.size - i - 1 + this.col, this.tempArray[i][j]);
                     }
                 }
-                block.draw();
+                this.draw();
             }
 
         }
@@ -273,18 +276,18 @@ let block = {
      * Метод создает новый блок в игровом массиве типа type.
      */
     create() {
-        block.col = Math.trunc(config.colsCount / 2) - block.size + 2;
-        block.row = 0;
-        block.type = nextBlock.type;
-        block.size = nextBlock.size;
-        for (let i = 0; i < block.size; i++) {
-            for (let j = 0; j < block.size; j++) {
-                if (nextBlock.array[i][j] === block.type) {
-                    block.setCell(i, j, nextBlock.array[i][j]); // [row][col]
+        this.col = Math.trunc(config.colsCount / 2) - this.size + 2;
+        this.row = 0;
+        this.type = nextBlock.type;
+        this.size = nextBlock.size;
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
+                if (nextBlock.array[i][j] === this.type) {
+                    this.setCell(i, j, nextBlock.array[i][j]); // [row][col]
                 }
             }
         }
-        block.draw();
+        this.draw();
     },
 
 };

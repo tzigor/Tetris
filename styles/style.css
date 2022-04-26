@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Lato:wght@300;400;700&family=Montserrat:wght@600;700&family=Play:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 
 :root {
     --mainBgColor: #cfcfcf;
@@ -17,55 +17,59 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-.game {}
-
-.header {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    padding-left: 50px;
-    color: blue;
-    background-color: rgb(238, 244, 255);
-    font-size: 34px;
-    line-height: 34px;
-}
-
-.info {
-    display: flex;
-    height: 50px;
-    align-items: center;
-    background-color: var(--mainBgColor);
-    justify-content: center;
-}
-
-.score {
-    background-color: inherit;
-    font-size: 26px;
-}
-
-.level {
-    color: brown;
-    background-color: inherit;
-    font-size: 26px;
-    margin-left: 100px;
-}
-
-.gameBoard {
-    display: flex;
-    background-color: var(--mainBgColor);
-    padding-bottom: 30px;
-    justify-content: center;
-    position: relative;
+.game {
     background-image: url("back1.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+.header {
+    font-family: 'Goldman', cursive;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding-left: 50px;
+    color: blue;
+    background-color: rgb(238, 244, 255);
+    font-size: 40px;
+}
+
+.logo {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.info {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.score {
+    color: white;
+    font-size: 26px;
+    text-shadow: black 0 0 3px;
+}
+
+.level {
+    color: white;
+    background-color: inherit;
+    font-size: 26px;
+    margin-left: 100px;
+    text-shadow: black 0 0 3px;
+}
+
+.gameBoard {
+    display: flex;
+    padding-bottom: 30px;
+    justify-content: center;
+    position: relative;
+}
+
 .gameContainer {
     margin-right: 30px;
-    margin-top: 20px;
-    ;
 }
 
 .hide {
@@ -197,6 +201,7 @@ body {
     color: white;
     font-size: 24px;
     margin-bottom: 20px;
+    text-shadow: black 0 0 2px;
 }
 
 .btnGrid {
@@ -232,6 +237,10 @@ body {
     border-radius: 5px;
     border: 2px solid white;
     border-style: outset;
+}
+
+.shadow {
+    box-shadow: 10px 10px 12px 0px rgba(34, 60, 80, 0.53);
 }
 
 table {

@@ -25,7 +25,7 @@ let game = {
         document.querySelector('.nextBlock').classList.remove('hide');
         document.querySelector('.info').classList.remove('hide');
         document.querySelector('.lowerNav').classList.remove('hide');
-        game.timerId = setInterval(block.shiftDown, config.timeInterval);
+        game.timerId = setInterval(block.shiftDown.bind(block), config.timeInterval);
         newBtnEl.textContent = 'New Game';
         game.active = true;
     },
@@ -148,4 +148,5 @@ document.querySelector('nav').addEventListener('click', event => {
 
     // после изменений перерисовываем игровой контейнер
     if (game.active) container.drawArray();
+    nextBlock.drawArray();
 });

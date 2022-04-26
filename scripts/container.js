@@ -70,7 +70,7 @@ let container = {
             }
             board += "</tr>";
         }
-        return `<table class="tableLight" ><tbody>${board}</tbody></table>`;
+        return `<table class="tableLight shadow" ><tbody>${board}</tbody></table>`;
     },
 
     /**
