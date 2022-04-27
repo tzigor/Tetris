@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Объект включает метод обрабки событий нажатий клавиш
+ */
 const action = {
     gameOverEl: document.querySelector('.gameOver'),
 

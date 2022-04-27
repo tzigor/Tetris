@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Объект включает свойства и методы работы с блоками
+ */
 const block = {
     row: 0, // текущее положение блока в игровом массиве (левый верхний угол)
     col: 0, //
@@ -174,7 +177,7 @@ const block = {
         if (config.level !== config.prevLevel) {
             if (config.level < 5) config.timeInterval = 1000 - 200 * config.level;
             clearInterval(game.timerId);
-            game.timerId = setInterval(this.shiftDown, config.timeInterval);
+            game.timerId = setInterval(block.shiftDown.bind(block), config.timeInterval);
             document.querySelector('.level').textContent = 'Level : ' + config.level;
         }
         config.prevLevel = config.level;

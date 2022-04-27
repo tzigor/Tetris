@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Объект включает свойства и методы игрового интерфейса (ui)
+ */
 const game = {
     score: 0,  // очки за игру
     timerId: 0,
@@ -88,7 +91,7 @@ btnPauseEl.addEventListener('click', event => {
     window.addEventListener('click', () => {
         if (!pauseEl.classList.contains('hide')) {
             pauseEl.classList.add('hide');
-            game.timerId = setInterval(block.shiftDown, config.timeInterval);
+            game.timerId = setInterval(block.shiftDown.bind(block), config.timeInterval);
         }
     });
 });
