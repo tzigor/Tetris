@@ -14,11 +14,13 @@ const action = {
             switch (event.key) {
                 case "ArrowUp":
                     block.rotate();
+                    document.activeElement.blur();
                     break;
                 case "ArrowDown":
                     block.shiftDown();
                     game.score++;
                     document.querySelector('.score').textContent = 'Score : ' + game.score;
+                    document.activeElement.blur();
                     break;
                 case "ArrowLeft":
                     block.shiftLeft();
